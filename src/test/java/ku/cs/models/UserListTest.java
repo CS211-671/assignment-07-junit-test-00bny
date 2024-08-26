@@ -51,13 +51,10 @@ class UserListTest {
         userList.addUser("Cathy", "789");
 
         // TODO: call login() with correct username and password
-        userList.login("Abby", "1234");
+        User user = userList.login("Abby", "123");
 
         // TODO: assert that User object is found
-        User user = userList.findUserByUsername("Abby");
-        String expected = "Abby";
-        String actual = user.getUsername();
-        assertEquals(expected, actual);
+        assertNotNull(user);
     }
 
     @Test
@@ -70,13 +67,11 @@ class UserListTest {
         userList.addUser("Cathy", "789");
 
         // TODO: call login() with incorrect username or incorrect password
-        userList.login("Anny", "12345");
+        User user = userList.login("Abby", "1234");
 
         // TODO: assert that the method return null
-        User user = userList.findUserByUsername("Abby");
-//        String expected = "Anny";
-        String actual = user.getUsername();
-        assertNull(actual);
+        assertNull(user);
     }
+
 
 }

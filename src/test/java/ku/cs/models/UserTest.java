@@ -26,9 +26,25 @@ class UserTest {
     }
 
     @Test
-    void testSetPassword() {
-        User user = new User("user01", "123");
-        user.setPassword("1234");
-        assertEquals(BCrypt.withDefaults().hashToString(12, "1234".toCharArray()), user.getPassword());
+    public void testIsUsername() {
+        User user = new User("user01", "plain-p@ssw0rd");
+        assertTrue(user.isUsername("user01"));
+        assertFalse(user.isUsername("user001"));
     }
+
+    @Test
+    public void testSetPassword() {
+        User user = new User("user01", "plain-p@ssw0rd");
+        user.setPassword("1234");
+        assertNotEquals("1234", user.getPassword());
+        assertTrue(BCrypt.verifyer().verify("1234".toCharArray(), user.getPassword()).verified);
+    }
+
+    @Test
+    public void testValidatePassword() {
+        User user = new User("user01", "123");
+        assertTrue(user.validatePassword("123"));
+        assertFalse(user.validatePassword("12345"));
+    }
+
 }

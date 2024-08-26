@@ -13,6 +13,12 @@ class StudentTest {
     }
 
     @Test
+    public void testChangeName() {
+        s1.changeName("Ben");
+        assertEquals("Ben", s1.getName());
+    }
+
+    @Test
     void testAddScore() {
 //        Student s1 = new Student("6610405930", "Benyapa");
         s1.addScore(40);
